@@ -1,0 +1,369 @@
+var db = require("../models/db.js");
+var position = require("../models/position.js");
+var food = require("../models/food.js");
+var shops = require("../models/shops.js");
+
+
+exports.getPosition = function(req,res,next){
+    console.log(req.params['geohash']);
+    var arr = req.params['geohash'].split(',');
+    var latitude = arr[0];
+    var longitude = arr[1];
+    position.findPositionbyposition(longitude,latitude,function(err,result){
+        res.json({"result":result});
+    })
+};
+var arr = [
+    {
+        "address":"北京市昌平区337省道",
+        "city":"北京市",
+        "geohash":"40.10038,116.36867",
+        "latitude":"40.10038",
+        "longitude":"116.36867",
+        "name":"昌平区北七家宏福科技园（337省道北）"
+    },
+    {
+        "address":"上海市宝山区淞宝路155弄18号",
+        "city":"上海市",
+        "geohash":"31.38098,121.50146",
+        "latitude":"31.38098",
+        "longitude":"121.50146",
+        "name":"淞宝路155弄18号星月国际商务广场1层"
+    },
+    {
+        "address":"广东省广州市海珠区马涌直街20号",
+        "city":"广州市",
+        "geohash":"23.09499,113.26166",
+        "latitude":"23.09499",
+        "longitude":"113.26166",
+        "name":"马涌直街20号"
+    }   
+];
+
+var arr1 = [
+	{
+	  "id":1,
+      "is_in_serving":true,
+      "description":"0元早餐0元起送，每天都有新花样。",
+      "title":"甜点饮品",
+      "link":"",
+      "image_url":"/public/images/shortcuts/shortcut01.png",
+      "icon_url":"",
+      "title_color":"",
+      "__v":0
+    },
+	 {
+	  "id":65,
+      "is_in_serving":true,
+      "description":"",
+      "title":"美食",
+      "link":"",
+      "image_url":"/public/images/shortcuts/shortcut01.png",
+      "icon_url":"",
+      "title_color":"",
+      "__v":0
+    },
+    {
+        "id":2,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"超市便利",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":3,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"面包蛋糕",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":4,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"川湘菜",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":5,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"准时达",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":6,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"土豪推荐",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":7,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"新店特惠",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":8,
+        "is_in_serving":true,
+        "description":"",
+        "title":"蔬菜水果",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":9,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"预定早餐",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":10,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"品质午餐",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      },
+      {
+        "id":11,
+        "is_in_serving":true,
+        "description":"0元早餐0元起送，每天都有新花样。",
+        "title":"低脂轻食",
+        "link":"",
+        "image_url":"/public/images/shortcuts/shortcut01.png",
+        "icon_url":"",
+        "title_color":"",
+        "__v":0
+      }
+
+  ]
+
+function add (arr,obj){
+    for(var i = 0; i< arr.length; i++){
+        obj.create(arr[i],function(err){
+            if(err){
+                console.log(err);
+                return;
+            }
+            console.log(i + ' '+ "添加成功");
+        })
+    }
+};
+var arr2 = [
+    {
+    "name":"味多美",
+    "address":"广东省广州市海珠区马涌直街20号",
+    "id":1196,
+    "latitude":23.09499,
+    "longitude":113.26166,
+    "location":[113.26166,23.09499],
+    "phone":"15827093506",
+    "category":"鲜花蛋糕/面包",
+    "supports":[
+        {
+            "description":"准时必达，超时秒赔",
+            "icon_color":"999999",
+            "icon_name":"准",
+            "id":9,
+            "name":"准时达",
+            "_id":"591bec73c2bbc84a6328a1e5"
+        },
+        {
+        "description":"该商家支持开发票，请在下单时填写好发票抬头"，
+        "icon_color":"99999",
+        "icon_name":"票",
+        "id":4,
+        "name":"开发票",
+        "_id":"5ad00b4fe543051ea2e5f5"
+        }
+        ],
+    "status":1,
+    "recent_order_num":444,
+    "rating_count":246,
+    "rating":4,
+    "promotion_info":"便靓正",
+    "piecewise_agent_fee":{"tips":"配送费约￥5"},
+    "opening_hours":["9:00/21:30"],
+    "license":{
+         "catering_service_license_image":"",
+         "business_license_image":""
+     },
+     "is_new":true,
+     "is_premium":true,
+     "image_path":"/img/shop/15c1513a00615.jpg",
+     "identification":{
+        "gistered_number":"",
+        "registered_address":"",
+        "operation_period":"",
+        "licenses_scope":"",
+        "censes_number":"",
+        "licenses_date":"",
+        "legal_person":"",
+        "identificate_date":null,
+        "identificate_agency":"",
+        "company_name":""
+     },
+     "float_minimum_order_amount":20,
+     "float_delivery_fee":5,
+     "distance":"19.5公里",
+     "order_lead_time":"40分钟",
+     "description":"普通商店",
+     "delivery_mode":{
+        "color":"57A9FF",
+        "id":1,
+        "is_solid":true,
+        "text":"蜂鸟专送"
+     },
+     "activities":[
+        {
+        "icon_name":"减",
+        "name":"满减优惠",
+        "description":"满30减5，满60减8",
+        "icon_color":"f07373",
+        "id":1,
+        "_id":"591bec73c2bbc84a6328a1e7"
+        }
+     ],
+     "__v":0
+    },
+    {
+    "name":"真功夫（百荣）",
+    "address":"浙江省杭州市余杭区高教路阿里巴巴西溪园区2号楼",
+    "id":1271,
+    "latitude":30.27817,
+    "longitude":120.022003,
+    "location":[120.022003,30.27817],
+    "phone":"15827093506",
+    "category":"快餐便当/简餐",
+    "supports":[
+        {
+        "description":"已加入'外卖保'计划，食品安全有保障",
+        "icon_color":"999999",
+        "icon_name":"保",
+        "id":7,
+        "name":"外卖保",
+        "_id":"591bec73c2bbc84a6328a1e5"
+        },
+        {
+        "description":"准时必达，超时秒赔",
+        "icon_color":"57A9FF",
+        "icon_name":"准",
+        "id":9,
+        "name":"准时达",
+        "_id":"5ad00b4fe543051ea2e5f5"
+        
+        },
+        {
+        "description":"该商家支持开发票，请在下单时填写好发票抬头",
+        "icon_color":"99999",
+        "icon_name":"票",
+        "id":4,
+        "name":"开发票",
+        "_id":"5ad00b4fe543051ea2e5f5"
+        }
+    ],
+    "status":1,
+    "recent_order_num":820,
+    "rating_count":305,
+    "rating":4.2,
+    "promotion_info":"111",
+    "piecewise_agent_fee":{
+      "tips":"配送费约￥5"
+        },
+    "opening_hours":["5:30/21:30"],
+    "license":{
+        "catering_service_license_image":"",
+        "business_license_image":""
+    },
+    "is_new":true,
+    "is_premium":true,
+    "image_path":"/public/shops/msite.jpg",
+    "identification":{
+        "registered_number":"",
+        "registered_address":"",
+        "operation_period":"",
+        "licenses_scope":"",
+        "licenses_number":"",
+        "licenses_date":"",
+        "legal_person":"",
+        "identificate_date":null,
+        "identificate_agency":"",
+        "company_name":""
+    },
+    "float_minimum_order_amount":20,
+    "float_delivery_fee":5,
+    "distance":"1265.1公里",
+    "order_lead_time":"18小时13分钟",
+    "description":"111",
+    "delivery_mode":{
+        "color":"57A9FF",
+        "id":1,
+        "is_solid":true,
+        "text":"蜂鸟专送"
+    },
+    "activities":[],
+    "__v":0
+    }
+];
+
+
+exports.addPosition = function(req,res,next){
+    add(arr,position);
+}
+exports.addFoodtype = function(req,res,next){
+    add(arr1,food);
+}
+
+exports.addPositionshops = function(req,res,next){
+    add(arr2,shops);
+}
+
+// // 用户注册
+// exports.registe = function(req,res,next){
+
+// }
+// 用户密码登录
+exports.login = function(req,res,next){
+    var form = new formidable.IncomingForm();
+    form.parse(req,function(err,fields){
+        console.log(fields);
+    })
+}
